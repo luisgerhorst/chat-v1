@@ -2,15 +2,15 @@ The send.js sends the message (using Ajax) to write.js which writes it (includin
 
 # Install
 
-Because the chat uses (http://nodejs.org/)[node.js] to receive the messages and write them into chat.txt you have to install node and then execute the file write.js with it. You also find a PHP based version of the chat at (http://github.com/luisgerhorst/chat)[github.com/luisgerhorst/chat].
+Because the chat uses node.js (http://nodejs.org/) to receive the messages and append them to chat.txt, you have to install node and then execute the file write.js with it. You also find a PHP based version of the chat at http://github.com/luisgerhorst/chat .
 
-1. Install node.js, you find a guidance for many systems at (https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)[github.com/joyent/node/wiki/Installing-Node.js-via-package-manager]
+1. Install node.js, you find a guidance for many systems at http://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 
 2. Download the chat and navigate to it's directory.
 
 3. Open send.js in a text editor and change 'http://domain.com:8888/' to your server's domain and save the file. (For example if your domain is 'http://luisgerhorst.de/' you have to change it to 'http://luisgerhorst.de:8888/'.)
 
-4. Open the command line and navigate to the chat's directory. Execute write.js with node by typing "node write.js" and you're done!
+4. Open the command line and navigate to the chat's directory, then execute write.js with node by typing "node write.js" and you're done!
 
 # More
 
