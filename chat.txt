@@ -1,0 +1,24 @@
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">This is the new version of my web chat. It uses node.js instead of PHP to receive the messages and write them into chat.txt</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">Go</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">why not</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">go</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">go</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">go</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">go</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">go</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">go</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">now</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">work</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">why</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">hmm</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">why</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">now</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">then</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">go</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">phh</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">ah</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">hey</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">jay</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">i like it</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">very </span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">when you type faser it's faster</span><span class="time"></span></div></div>
