@@ -14,7 +14,7 @@ if(e && e.keyCode == 13) { // wenn Taste (e) Enter ist (keycode 13) wird
  
   $.ajax({ // Formulardaten abschicken (Request)
 
-    url: 'http://domain.com:8888/', // Ort des Skriptes in dem die per POST übertragenen Daten verarbeitet werden sollen
+    url: 'http://luisgerhorst.de:8888/', // Ort des Skriptes in dem die per POST übertragenen Daten verarbeitet werden sollen
     type: 'post', // Angabe der POST Methode, GET ginge auch
     data: entry, // Daten die gesendet werden sollen
     

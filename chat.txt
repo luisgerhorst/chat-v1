@@ -22,3 +22,5 @@
 <div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">i like it</span><span class="time"></span></div></div>
 <div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">very </span><span class="time"></span></div></div>
 <div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">when you type faser it's faster</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">work!</span><span class="time"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">pff. yay!</span><span class="time"></span></div></div>
