@@ -64,13 +64,13 @@ a {
     font-weight: bold;
     }
     
-#chat .time {
+#chat .relativeTime {
     color: rgb(160,160,160);
     opacity: 0.0;
     display: inline;
     }
     
-#chat .entry:hover .time {
+#chat .entry:hover .relativeTime {
     opacity: 1.0;
     }
     
