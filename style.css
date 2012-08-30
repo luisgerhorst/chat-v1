@@ -1,4 +1,4 @@
-/* Version 1.1.3 Build 2 */
+/* Version 1.1.3 Build 3 */
 
 /* Allgemein */
 
@@ -64,13 +64,13 @@ a {
     font-weight: bold;
     }
     
-#chat .relativeTime {
+#chat .time {
     color: rgb(160,160,160);
     opacity: 0.0;
     display: inline;
     }
     
-#chat .entry:hover .relativeTime {
+#chat .entry:hover .time {
     opacity: 1.0;
     }
     

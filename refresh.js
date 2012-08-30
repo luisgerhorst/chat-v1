@@ -4,15 +4,15 @@
 
 var xmlhttp;
 
-// damit Ajax funktioniert
+// needed for Ajax
 function loadXMLDoc(url,cfunc) {
     
-    // fuer moderne Browser (Safari, Chrome, Firefox, Opera)
+    // for modern Browser (Safari, Chrome, Firefox, Opera)
     if (window.XMLHttpRequest) {
       xmlhttp = new XMLHttpRequest();
     }
     
-    // fuer alte Browser (Internet Explorer)
+    // for Internet Explorer
     else {
       xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
@@ -24,19 +24,19 @@ function loadXMLDoc(url,cfunc) {
 } // loadXMLDoc()
 
 
-// laedt chat.txt und befuellt #chat mit dessen inhalt
+// loads chat.txt and adds it's content to #chat
 function loadChat() {
     loadXMLDoc("chat.txt",function() {
       if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-        document.getElementById("chat").innerHTML = ""; // leert #chat
-        document.getElementById("chat").innerHTML = xmlhttp.responseText; // befüllt #chat
-        setTime()
+        document.getElementById("chat").innerHTML = ""; // makes #chat empty
+        document.getElementById("chat").innerHTML = xmlhttp.responseText; // fills #chat with the content of chat.txt
+        setTime(); // calls setTime() which updates the relative timestamps
       } // if
     }); // loadXMLDoc() 
 } // loadChat()
 
 
-/* function from http://webdesign.onyou.ch/2010/08/04/javascript-time-ago-pretty-date/ */
+/* function from http://webdesign.onyou.ch/2010/08/04/javascript-time-ago-pretty-date/ - converts ISO 8601 timestamps to relative timestamps */
 function relativeTime(date_str){
 	var time_formats = [
 	[60, 'seconds', 1], // 60
@@ -76,22 +76,23 @@ function relativeTime(date_str){
 }
 
 
+// adds relative timestamps to every entry
 function setTime() {
-    $('span.time').each(function(index) {
-      var time = $(this).attr('data-time');
-      var time = relativeTime(time);
-      $(this).text(time).removeClass('time').addClass('relativeTime');
-    });
+    $('span.time').each(function(index) { // for every <span> with the class "time", do:
+      var time = $(this).attr('data-time'); // get's the content of 'data-time=""' (for example 
+      var time = relativeTime(time); // coverts it to realtive timestamps
+      $(this).text(time); // add's the relative timestamp into <span class="time"></span>
+    }); // .each
 }
 
 
-// ruft loadChat() ein mal pro Sekunde auf
+// calls loadChat one time a second
 setInterval(function() {
     loadChat();
 }, 1000);
 
 
-// ruft loadChat() nach Aufbau der Seite auf
+// calls loadChat() 100ms after the page was loaded
 setTimeout(function() {
     loadChat();
 }, 100);

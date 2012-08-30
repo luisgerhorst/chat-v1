@@ -1,12 +1,12 @@
-// Version 2.0 Build 2
+// Version 2.0 Build 3
 
-/* Verschiedene weitere Funktionen */
+/* A few more functions */
 
 
 $(document).ready(function () {
 
 
-// scrollt nach unten
+// scrolls down
 function scrollToBottom() {
     window.setTimeout(function() { window.scrollTo(0,document.body.scrollHeight); }, 200);
     window.setTimeout(function() { window.scrollTo(0,document.body.scrollHeight); }, 250);
@@ -18,23 +18,22 @@ function scrollToBottom() {
 }
 
 
-// liest eine per GET übergebene Variable aus
+// get's the content of GET parameter
 function get(name) {
     return unescape((RegExp(name + '=' + '(.+?)(&|$)').
     exec(location.search)||[,""])[1]);
 }
 
 
-// Für iPhone, iPod & iPad: Zeigt Datum und Uhrzeit beim Tippen auf die Nachricht
+// for iOS, shows the time when tapping onto a message
 if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
     $("*").click(function(){});
 } // if
 
 
-// Scrollt beim laden der Seite nach unten und setzt den Value von #new_name auf den per GET übergebenen Namen "name"
 setTimeout(function() {
-    $('#new_name').val(get("name"));
-    scrollToBottom();
+    $('#new_name').val(get("name")); // adds the content of the GET parameter "name" into the name field
+    scrollToBottom(); // scrolls down
 }, 0);
 
 
