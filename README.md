@@ -26,4 +26,4 @@ If you want to **stop the chat**, you can get it's PID by typing "ps aux", searc
 
 If you **use the chat regularly**, you can **add ?name=[your name]** to the chat's URL so your name is automatically added into the Name field. Example URL: http://chat.luisgerhorst.de/?name=Alf
 
-If your webspace doesn't supports node.js or you're just a PHP fanboy, you can get the older, **PHP based version** of the chat on http://github.com/luisgerhorst/chat
+If your webspace doesn't supports node.js or you're just a PHP fanboy, you can get the older, **PHP based version** of the chat on http://github.com/luisgerhorst/php-chat
