@@ -1,39 +1,6 @@
-// Version 1.0 Build 2
+// Build 6
 
 /* Befuellt #chat einmal pro Sekunde mit dem inhalt von chat.txt */
-
-var xmlhttp;
-
-// needed for Ajax
-function loadXMLDoc(url,cfunc) {
-    
-    // for modern Browser (Safari, Chrome, Firefox, Opera)
-    if (window.XMLHttpRequest) {
-      xmlhttp = new XMLHttpRequest();
-    }
-    
-    // for Internet Explorer
-    else {
-      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    
-    xmlhttp.onreadystatechange = cfunc;
-    xmlhttp.open("post",url,true);
-    xmlhttp.send();
-    
-} // loadXMLDoc()
-
-
-// loads chat.txt and adds it's content to #chat
-function loadChat() {
-    loadXMLDoc("chat.txt",function() {
-      if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-        document.getElementById("chat").innerHTML = ""; // makes #chat empty
-        document.getElementById("chat").innerHTML = xmlhttp.responseText; // fills #chat with the content of chat.txt
-        setTime(); // calls setTime() which updates the relative timestamps
-      } // if
-    }); // loadXMLDoc() 
-} // loadChat()
 
 
 /* function from http://webdesign.onyou.ch/2010/08/04/javascript-time-ago-pretty-date/ - converts ISO 8601 timestamps to relative timestamps */
@@ -77,22 +44,45 @@ function relativeTime(date_str){
 
 
 // adds relative timestamps to every entry
-function setTime() {
-    $('span.time').each(function(index) { // for every <span> with the class "time", do:
-      var time = $(this).attr('data-time'); // get's the content of 'data-time=""' (for example 
-      var time = relativeTime(time); // coverts it to realtive timestamps
+function time() {
+    $('span.time').each(function(index) { // for each <span> with the class "time", do:
+      var time;
+      time = $(this).attr('data-time'); // get's the content of 'data-time=""' (for example 
+      time = relativeTime(time); // coverts it to realtive timestamps
       $(this).text(time); // add's the relative timestamp into <span class="time"></span>
     }); // .each
 }
 
 
-// calls loadChat one time a second
+// loads chat.txt and adds it's content to #chat
+var loadedData; // needed to make Javascript remember the data that has already been loaded
+function refresh() {
+
+    $.ajaxSetup ({
+        cache: false // Disable caching of AJAX ( responses
+    }); // .ajaxSetup
+
+    $.get('chat.txt', function(data) { // loads the content of chat.txt
+    
+        if (data != loadedData) { // if the new data unequally with the data that has already been loaded
+            loadedData = data; // loaded data becomes the new 'loadedData'
+            $('#chat').html(data); // #chat is filled with the loaded data
+            time(); // new relative times are calculated
+        } // if
+    
+        else { // if no new entries have been added since the last refresh
+	        time(); // only new relative times are calculated
+        } // else
+    
+    }); // .get
+    
+} // refresh
+
+
+// calls refresh() one time a second
 setInterval(function() {
-    loadChat();
+    refresh();
 }, 1000);
 
-
-// calls loadChat() 100ms after the page was loaded
-setTimeout(function() {
-    loadChat();
-}, 100);
+// calls refresh() after the page has loaded
+refresh();

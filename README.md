@@ -1,4 +1,4 @@
-Version 2.1.2
+Version 2.2
 
 The send.js sends the message (using jQuery Ajax) to write.js that writes it, including HTML Tags, into chat.txt. refresh.js loads the content of chat.txt one time a second into the div #chat.
 

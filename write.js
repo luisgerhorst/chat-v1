@@ -1,4 +1,4 @@
-// Version 1.0 Build 2
+// Build 4
 
 /* get's the by send.js sent data and appends it to chat.txt */
 
@@ -13,7 +13,7 @@ var url = require("url"),
 // starts a server and listens on port 8888
 var port = 8888;
 http.createServer(onRequest).listen(port);
-console.log("Server started, listening on port" + port + "\n");
+console.log("Server started, listening on port " + port + "\n");
 
 
 // listens for the POST data
@@ -35,13 +35,38 @@ function onRequest(request, response) {
           message = querystring.parse(postData).message,
           time = querystring.parse(postData).time;
       write(name, message, time); // calls the function write
-      console.log("Received POST data:\nname='" + name + "'\nmessage='" + message + "'\n");
+      console.log("Received POST data:\nname='" + name + "'\nmessage='" + message + "'\ntime=" + time + "\n");
     });
 
 }
 
 
-// hyperlinks URLs
+function write(name, message, time) {
+
+    name = html(name); // encodes HTML tags
+    
+    message = link(html(message)) + ' '; // encodes HTML tags, hyperlinks URLs and adds a space to the end of the message
+
+    var entry = '<div class="entry"><div class="name">' + name + ':</div><div class="content"><span class="message">' + message + '</span><span class="time" data-time="' + time + '"></span></div></div>\n'; // creates the entry that will be written into chat.txt
+    
+    var file = 'chat.txt';
+   
+    // appends the entry to the file (chat.txt)
+    fs.appendFile(file, entry, function (err) {
+      if (err) throw err;
+      else console.log("Added:\n" + entry + "To:\n" + file + "\n");
+    });
+    
+}
+
+
+// function via http://css-tricks.com/snippets/javascript/htmlentities-for-javascript/ - encodes HTML tags
+function html(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+
+// function via http://stackoverflow.com/questions/37684/how-to-replace-plain-urls-with-links - hyperlinks URLs
 function link(inputText) {
     var replaceText, replacePattern1, replacePattern2, replacePattern3;
 
@@ -58,21 +83,4 @@ function link(inputText) {
     replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
 
     return replacedText;
-}
-
-
-function write(name, message, time) {
-    
-    var message = link(message) + ' '; // hyperlinks URLs and add a space at the end of the message
-
-    var entry = '<div class="entry"><div class="name">' + name + ':</div><div class="content"><span class="message">' + message + '</span><span class="time" data-time="' + time + '"></span></div></div>\n'; // creates the entry that will be written into chat.txt
-    
-    var file = 'chat.txt';
-   
-    // appends the entry to the file (chat.txt)
-    fs.appendFile(file, entry, function (err) {
-      if (err) throw err;
-      else console.log("Added:\n" + entry + "To:\n" + file + "\n");
-    });
-    
 }
