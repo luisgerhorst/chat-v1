@@ -25,3 +25,14 @@
 <div class="entry"><div class="name">onto:</div><div class="content"><span class="message">interesting </span><span class="time" data-time="2012-09-01T08:25:50Z"></span></div></div>
 <div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">The input fields are now fixed. </span><span class="time" data-time="2012-09-01T17:54:21Z"></span></div></div>
 <div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">Work's. I'll upload the changes to GitHub. </span><span class="time" data-time="2012-09-01T19:16:45Z"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">Commited. </span><span class="time" data-time="2012-09-01T19:32:16Z"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">Also works great in Safari. </span><span class="time" data-time="2012-09-01T20:41:31Z"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">But not in Opera... </span><span class="time" data-time="2012-09-01T20:43:20Z"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">Sending messages doesn't work. Arg, I hate Opera. </span><span class="time" data-time="2012-09-01T20:45:06Z"></span></div></div><div class="entry"><div class="name">undefined:</div><div class="content"><span class="message">undefined </span><span class="time" data-time="undefined"></span></div></div>
+<div class="entry"><div class="name">undefined:</div><div class="content"><span class="message">undefined </span><span class="time" data-time="undefined"></span></div></div>
+<div class="entry"><div class="name">undefined:</div><div class="content"><span class="message">undefined </span><span class="time" data-time="undefined"></span></div></div>
+<div class="entry"><div class="name">undefined:</div><div class="content"><span class="message">undefined </span><span class="time" data-time="undefined"></span></div></div>
+<div class="entry"><div class="name">undefined:</div><div class="content"><span class="message">undefined </span><span class="time" data-time="undefined"></span></div></div>
+<div class="entry"><div class="name">нян:</div><div class="content"><span class="message">ня </span><span class="time" data-time="2012-09-03T09:26:23Z"></span></div></div>
+<div class="entry"><div class="name">нян:</div><div class="content"><span class="message">русские буквы </span><span class="time" data-time="2012-09-03T09:27:01Z"></span></div></div>
+<div class="entry"><div class="name">Luis:</div><div class="content"><span class="message">Just fixed the bug that creates this 'undefined'. </span><span class="time" data-time="2012-09-03T13:09:05Z"></span></div></div>
