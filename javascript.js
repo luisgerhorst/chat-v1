@@ -1,4 +1,4 @@
-// Build 6
+// Build 8
 
 /* A few more functions */
 
@@ -11,11 +11,10 @@ if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i
     $('*').click(function(){});
 } // if
 
-
-$('#new_name').val(GETParameter('name')); // adds the content of the GET parameter "name" into the name field
+$('#new_name').val(parseGET('name')); // adds the content of the GET parameter "name" into the name field
 
 // get's the content of GET parameter
-function GETParameter(name) {
+function parseGET(name) {
     return unescape((RegExp(name + '=' + '(.+?)(&|$)').
     exec(location.search)||[,''])[1]);
 }

@@ -1,4 +1,4 @@
-// Build 7
+// Build 9
 
 /* get's the by send.js sent data and appends it to chat.txt */
 
@@ -16,69 +16,96 @@ console.log("Server started, listening on port " + port + "\n");
 
 
 // listens for the POST data
-function onRequest(request, response) {
+function onRequest(req, res) {
 
-    console.log("Received request\n");
+    //console.log("Received request\n");
 
     var postData = '';
 
-    request.setEncoding("utf8"); // post data encoding is now UTF8
+    req.setEncoding("utf8"); // post data encoding is now UTF8
 
-    request.addListener("data", function(postDataChunk) { // listens for the data
-      postData += postDataChunk; // when a new chunk ('part') of the sent data arrives it's appended to "postData"
-      console.log("Received POST data chunk:\n'" + postDataChunk + "'\n");
+    req.addListener("data", function(postDataChunk) { // listens for the data
+        postData += postDataChunk; // when a new chunk ('part') of the sent data arrives it's appended to "postData"
+        //console.log("Received POST data chunk:\n'" + postDataChunk + "'\n");
     });
 
-    request.addListener("end", function() { // when the whole data has arrived:
-      var name, message, time;
-      name = querystring.parse(postData).name, // name is now the content of name (from the sent string)
-      message = querystring.parse(postData).message,
-      time = querystring.parse(postData).time;
-      console.log("Received POST data:\nname='" + name + "'\nmessage='" + message + "'\ntime='" + time + "'\n");
-      write(name, message, time);
-    });
-
-}
-
-
-function write(name, message, time) {
-
-    console.log("Function write() was called\n");
-
-    var entry, file;
-
-    name = html(name); // encodes HTML tags
+    req.addListener("end", function() { // when the whole data has arrived:
     
-    message = link(html(message)) + ' '; // encodes HTML tags, hyperlinks URLs and adds a space to the end of the message
-
-    entry = '<div class="entry"><div class="name">' + name + ':</div><div class="content"><span class="message">' + message + '</span><span class="time" data-time="' + time + '"></span></div></div>\n', // creates the entry that will be written into chat.txt
-    
-    file = 'chat.txt';
-   
-    // appends the entry to the file (chat.txt)
-    fs.appendFile(file, entry, function (err) {
-      if (err) throw err;
-      else console.log("Added:\n" + entry + "To:\n" + file + "\n");
+        var reqType='', userID='', name='', message='', time='';
+        reqType = querystring.parse(postData).reqType;
+        userID = querystring.parse(postData).userID;
+        name = querystring.parse(postData).name;
+        message = querystring.parse(postData).message;
+        time = querystring.parse(postData).time;
+        
+        if (reqType == 'message' && userID && name && message && time) saveMessage(userID, name, message, time);
+        if (reqType == 'user' && userID && name) saveUser(userID, name);
+        
     });
     
-}
-
-
-// function via http://css-tricks.com/snippets/javascript/htmlentities-for-javascript/ - encodes HTML tags
-function html(text) {
-    return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-
-
-// function via http://stackoverflow.com/questions/37684/how-to-replace-plain-urls-with-links - hyperlinks URLs
-function link(text) {
-
-    var url, www, mail;
-
-    url = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim; // URLs starting with http://, https://, or ftp://
-    www = /(^|[^\/])(www\.[\S]+(\b|$))/gim; // URLs starting with "www." (without // before it, or it'd re-link the ones done above).
-    mail = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;  // Change email addresses to mailto:: links.
+    removeUsers();
     
-    return String(text).replace(url, '<a href="$1" target="_blank">$1</a>').replace(www, '$1<a href="http://$2" target="_blank">$2</a>').replace(mail, '<a href="mailto:$1">$1</a>');
+    var responseData = {};
+    responseData["messages"] = messages;
+    responseData["users"] = users;
+    
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end("chat('" + JSON.stringify(responseData) + "')");
+
+}
+
+
+var messages = {};
+
+var obj = {};
+obj["userID"] = 0;
+obj["name"] = 'Chat';
+obj["message"] = 'Type in your name and message, then hit enter to submit. URLs and mail addresses are hyperlinked.';
+obj["time"] = getISODate();
+
+messages[Object.keys(messages).length] = obj;
+
+function getISODate() {
+    d = new Date();
+    function pad(n){return n < 10 ? '0' + n : n}
+    return d.getUTCFullYear() + "-" + pad(d.getUTCMonth()+1) + "-" + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds()) + "Z";
+}
+
+function saveMessage(userID, name, message, time) {
+    
+    console.log("Function saveMessage() was called");
+    
+    var obj = {};
+    obj["userID"] = userID;
+    obj["name"] = name;
+    obj["message"] = message;
+    obj["time"] = time;
+    
+    messages[Object.keys(messages).length] = obj;
     
 }
+
+
+var users = {};
+
+function saveUser(userID, name) {
+    
+    var obj = {};
+    obj["name"] = name;
+    obj["unixTime"] = new Date().getTime();
+	
+	users[userID] = obj;
+	
+}
+
+
+function removeUsers() {
+	
+	for (userID in users) {
+		if (new Date().getTime() - users[userID]["unixTime"] >= 10*1000) {
+			delete users[userID];
+		}
+	}
+	
+}
+

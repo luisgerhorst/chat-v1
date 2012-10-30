@@ -4,8 +4,8 @@
 
 <!-- 
     
-  Project: Version 2.2.1
-  Document: Build 7
+  Project: view README.MD
+  Document: Build 10
 	
   Chat created by Luis Gerhorst -  Website: http://luisgerhorts.de/ - Mail & Jabber: luis@luisgerhorst.de
   Fork me on GitHub http://github.com/luisgerhorst/node-chat
@@ -29,19 +29,24 @@
 </head>
 <body>
 
+
+<ul id="users"></ul>
+
+
 <div id="wrapper">
 
 
-<div id="chat"><noscript><p>You have to enable Javascript to use this chat.</p></noscript></div> <!-- #chat (will be filled with the content of chat.txt by refresh.js)  -->
+	<ol id="messages"><noscript><p>You have to enable Javascript to use this chat.</p></noscript></ol> <!-- #chat (will be filled with the content of chat.txt by refresh.js)  -->
 
 
-<form class="form" id="new" action="save.php" method="POST">
+	<form class="form" id="new">
 
-  <input class="name" id="new_name" name="name" placeholder="      Name" autocomplete="on">
+		<div class="name hide" id="name"></div>
+		<input class="name show" id="new_name" name="name" placeholder="      Name" autocomplete="on">
 
-  <input class="message" id="new_message" name="message" placeholder="Message" onKeyPress="return send(event)" autocomplete="off" > <!-- onKeyPress="return send(event)" calls the Javascript function (checkSubmit) which send the data to the server if the pressed key is enter -->
+		<input class="message" id="new_message" name="message" placeholder="Message" onKeyPress="return sendMessage(event)" autocomplete="off" > <!-- onKeyPress="return send(event)" calls the Javascript function (checkSubmit) which send the data to the server if the pressed key is enter -->
 
-</form> <!-- #new -->
+	</form> <!-- #new -->
 
 
 </div> <!-- #wrapper -->

@@ -1,9 +1,20 @@
-// Build 8
+// Build 12
 
 /* Sends current UTC time, name and message to the server */
 
 
-function send(e) { // function is called in index.html line 32, every time a key is pressed
+var userID = Math.round(Math.random() * 9999999999);
+
+
+$.ajaxSetup({
+
+	url: 'http://luisgerhorst.de:8002/',
+    cache: false,
+    
+});
+
+
+function sendMessage(e) { // function is called in index.html line 32, every time a key is pressed
 if (e && e.keyCode == 13 && $('#new_name').val() && $('#new_message').val()) { // if pressed key ("e") is enter (keycode 13) and value of name & message is true
 
     var name = '', message = '', time = '', data = '';
@@ -12,38 +23,62 @@ if (e && e.keyCode == 13 && $('#new_name').val() && $('#new_message').val()) { /
     message = $('#new_message').val(); // value of #new_name is now Javascript variable "message"
 
     time = getISODate(); // creates a new Date object and adds the current UTC time in ISO 8601 format to it
- 
-    data = 'name=' + encodeURIComponent(name) + '&message=' + encodeURIComponent(message) + '&time=' + time; // creates a string including name, message and time
     
-    if (name && message && time && data) { // if everything is alright
+    function getISODate() {
+    	d = new Date();
+    	function pad(n){return n < 10 ? '0' + n : n}
+    	return d.getUTCFullYear() + "-" + pad(d.getUTCMonth()+1) + "-" + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds()) + "Z";
+    }
  
-        $.ajax({ // sends the data (Request)
+    data = 'reqType=message&userID=' + userID + '&name=' + encodeURIComponent(encodeHTML(name)) + '&message=' + encodeURIComponent(message) + '&time=' + time; // creates a string including name, message and time
     
-            url: 'http://luisgerhorst.de:8002/', // where the data should be sent
-            type: 'post', // POST method, GET also works if you change write.js
-            data: data, // data that should be sent
+    function encodeHTML(text) {
+		return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+	}
+    
+    $.ajax({ // sends the data (Request)
+    
+        type: 'post', // POST method, GET also works if you change write.js
+        data: data // data that should be sent
         
-            /* I also tried to make server.js send a response to the client so I can use the jQuery Ajax Event "success" here (http://api.jquery.com/jQuery.ajax/) and #new_message's value is just set to '' if the request was successful, but I couldn't make it work! Would be nice if someone could help me a bit with this. Feel free to send me a mail! luis@luisgerhorst.de */
-        
-        }); // ajax request
+    }); // ajax request
   
-        $('#new_message').attr('placeholder', 'Sending ...').val(''); // placeholder to "Sending ..." and empties #new_message
-        window.setTimeout(function() {
-          $('#new_message').attr('placeholder', 'Sent.'); // change placeholder after one second to "Sent."
-          window.setTimeout(function() {
-            $('#new_message').attr('placeholder', 'Message'); // placeholder after one more second to "Message"
-          }, 1000);
-        }, 1000);
+    // so you can't change your name anymore:
+    $('#name').text(name + ':').removeClass('hide').addClass('show');
+    $('#new_name').removeClass('show').addClass('hide');
     
-    } // if
+    $('#new_message').val('').attr('placeholder', 'Sent.'); // placeholder to "Sending ..." and empties #new_message
+    window.setTimeout(function() {
+    	$('#new_message').attr('placeholder', 'Message'); // placeholder after one more second to "Message"
+    }, 1000);
 
 } // if
 } // send
 
 
-// function via http://stackoverflow.com/questions/2573521/how-do-i-output-an-iso-8601-formatted-string-in-javascript - creates an ISO 8601 (UTC) timestamp
-function getISODate() {
-    d = new Date();
-    function pad(n){return n < 10 ? '0' + n : n}
-    return d.getUTCFullYear() + "-" + pad(d.getUTCMonth()+1) + "-" + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds()) + "Z";
+sendUser();
+
+setInterval(function() {
+    sendUser();
+}, 5*1000);
+
+function sendUser() {
+
+    var name = '', data = '';
+     
+    name = $('#new_name').val(); // value of #new_name is now Javascript variable "name"
+    
+    if (name && userID && $('#name').html()) {
+	
+		data = 'reqType=user&userID=' + userID + '&name=' + encodeURIComponent(name); // creates a string including name, message and time
+    
+		$.ajax({ // sends the data (Request)
+    
+        	type: 'post', // POST method, GET also works if you change server.js
+        	data: data // data that should be sent
+        
+        }); // ajax request
+    
+    }
+	
 }
