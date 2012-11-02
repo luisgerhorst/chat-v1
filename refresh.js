@@ -1,19 +1,11 @@
-// Build 10
-
-/* Befuellt #chat einmal pro Sekunde mit dem inhalt von chat.txt */
+// Build 13
 
 
-// calls refresh() after the page has loaded
-refresh();
+refresh(); // calls refresh() after the page has loaded
 
-
-// call refresh() all 2 seconds
-setInterval(function() {
+setInterval(function() { // calls refresh() all 2 seconds
     refresh();
-}, 2000);
-
-
-// loads chat.txt and adds it's content to #chat
+}, 2*1000);
 
 var oldMessages; // needed to make Javascript remember the data that has already been loaded
 
@@ -21,14 +13,13 @@ function refresh() {
     
     $.ajax({
     
-        crossDomain: true,
 		dataType: "jsonp",
 		jsonpCallback: "chat",
         success: function(data) {
             
             data = JSON.parse(data);
             
-            messages = data["messages"];
+            messages = data.messages;
             
             if (messages != oldMessages) { // if the new data unequally with the data that has already been loaded
             	oldMessages = messages; // loaded data becomes the new 'oldMessages'
@@ -41,17 +32,15 @@ function refresh() {
 	        	setTime(); // only new relative times are calculated - function defined in javascript.js
 	        } // else
 	        
-	        users = data["users"];
+	        users = data.users;
 	        createUsersHTML(users);
-	        
-	        
 	        
         },
         error: function(jqXHR, textStatus, errorThrown) {
             
             console.log('refresh() error: ' + textStatus + " " + errorThrown);
             
-        },
+        }
         
     });
     
@@ -62,13 +51,12 @@ function createMessagesHTML(messages) {
 	
 	var html='';
 	
-	for (var key in messages) {
-		html = html + '<li data-userID="' + messages[key]["userID"] + '"><span class="name">' + messages[key]["name"] + ':</span><div class="content"><span class="message">' + linkURLs(messages[key]["message"]) + ' </span><span class="time" data-time="' + messages[key]["time"] + '"></span></div></li>';
+	for (var number in messages) {
+		html += '<li data-userID="' + messages[number].userID + '"><span class="name">' + messages[number].name + ':</span><div class="content"><span class="message">' + linkURLs(messages[number].message) + ' </span><span class="time" data-time="' + messages[number].time + '"></span></div></li>';
 	}
 	
 	$('#messages').html(html);
 	
-	// function via http://stackoverflow.com/questions/37684/how-to-replace-plain-urls-with-links - hyperlinks URLs
 	function linkURLs(text) {
 		var url = '', www = '', mail = '';
 		url = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim; // URLs starting with http://, https://, or ftp://
@@ -79,24 +67,22 @@ function createMessagesHTML(messages) {
 	
 }
 
-
 function createUsersHTML(users) {
 	
 	var html='';
 	
-	for (var key in users) {
-		html = html + '<li data-userID="' + key + '">' + users[key]["name"] + '</li>';
+	for (var userID in users) {
+		html += '<li data-userID="' + userID + '">' + users[userID].name + '</li>';
 	}
 	
-	html = '<p>Online:</p>' + html;
-	
-	$('#users').html(html);
+	if (html) {
+		html = '<p>Online:</p>' + html;
+		$('#users').html(html);
+	}
 	
 }
 
-
-// adds relative timestamps to every entry
-function setTime() {
+function setTime() { // adds relative timestamps to every entry
 
     $('span.time').each(function(index) { // for each <span> with the class "time", do:
     if ($(this).attr('data-time')) { // if this <span> has 'data-time' attribute
@@ -111,8 +97,6 @@ function setTime() {
     
 }
 
-
-// scrolls down
-function scrollDown() {
+function scrollDown() { // scrolls down
     window.scrollTo(0,document.body.scrollHeight);
 }
