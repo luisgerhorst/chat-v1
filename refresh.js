@@ -78,6 +78,8 @@ function createUsersHTML(users) {
 		$('#users').html(html);
 	}
 	
+	else $('#users').html('');
+	
 }
 
 function setTime() { // adds relative timestamps to every entry
