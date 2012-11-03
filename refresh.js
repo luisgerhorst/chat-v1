@@ -1,4 +1,4 @@
-// Build 13
+// Build 14
 
 
 refresh(); // calls refresh() after the page has loaded
@@ -14,7 +14,7 @@ function refresh() {
     $.ajax({
     
 		dataType: "jsonp",
-		jsonpCallback: "chat",
+		jsonpCallback: "chat_refresh",
         success: function(data) {
             
             data = JSON.parse(data);
@@ -37,9 +37,7 @@ function refresh() {
 	        
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            
-            console.log('refresh() error: ' + textStatus + " " + errorThrown);
-            
+            console.log('Error while refreshing: ' + textStatus + ' ' + errorThrown);
         }
         
     });
@@ -84,16 +82,18 @@ function createUsersHTML(users) {
 
 function setTime() { // adds relative timestamps to every entry
 
-    $('span.time').each(function(index) { // for each <span> with the class "time", do:
-    if ($(this).attr('data-time')) { // if this <span> has 'data-time' attribute
+    $('span.time').each(function(index) { // for each, do
     
-      var time;
-      time = moment('"' + $(this).attr('data-time') + '"', "YYYY-MM-DDTHH:mm:ssZ"); // cretates moment() with the content of the data-time attribute
-      time = time.from(moment().utc()); // coverts it to realtive timestamps
-      $(this).text(time); // add's the relative timestamp into <span class="time"></span>
+    	if ($(this).attr('data-time')) { // if this element has 'data-time' attribute
+    
+	    	var time;
+	    	time = moment('"' + $(this).attr('data-time') + '"', "YYYY-MM-DDTHH:mm:ssZ"); // cretates moment() with the content of the data-time attribute
+	    	time = time.from(moment().utc()); // coverts it to realtive timestamps
+	    	$(this).html(time); // add's the relative timestamp into the element
       
-    } // if
-    }); // .each
+	    }
+	    
+    });
     
 }
 

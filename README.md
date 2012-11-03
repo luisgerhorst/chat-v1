@@ -1,4 +1,4 @@
-**Version 3.1**
+**Version 3.1.1**
 
 send.js sends the message (using jQuery Ajax) to server.js that saves it into an object, also one time every 5 seconds it send.js sends the userID and name to the server (that also saves it into an object). If a user hasn't sent his userID to the server for 10 seconds or more, the server removes him from the users object. refresh.js loads the messages and users as JSON object from the server and displays them in #messages and #users.
 

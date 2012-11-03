@@ -1,6 +1,4 @@
-// Build 13
-
-/* Sends current UTC time, name and message to the server */
+// Build 14
 
 
 var userID = Math.round(Math.random() * 9999999999);
@@ -14,7 +12,7 @@ $.ajaxSetup({
 });
 
 
-function sendMessage(e) { // function is called in index.html line 32, every time a key is pressed
+function sendMessage(e) { // function is called by index.html's form, every time a key is pressed
 
 	var name='', message='';
 	name = $('#new_name').val();
@@ -31,24 +29,24 @@ function sendMessage(e) { // function is called in index.html line 32, every tim
     
 	    $.ajax({ // sends the data (Request)
     
-        	type: 'post', // POST method, GET also works if you change write.js
-        	data: JSON.stringify(data) // data that should be sent
+        	type: 'post', // POST method, GET also works if you change the server
+        	data: JSON.stringify(data) // data to be sent
         
         });
-  
+        
         // so you can't change your name anymore:
-        $('#name').text(name + ':').removeClass('hide').addClass('show');
-        $('#new_name').removeClass('show').addClass('hide');
+		$('#name').text(name + ':').removeClass('hide').addClass('show');
+		$('#new_name').removeClass('show').addClass('hide');
     
-        // so the user knows the message is sent (changes the placeholder)
-        $('#new_message').val('').attr('placeholder', 'Sent.'); // placeholder to "Sending ..." and empties #new_message
-        window.setTimeout(function() {
-    		$('#new_message').attr('placeholder', 'Message'); // placeholder after one more second to "Message"
-    	}, 1000);
+		// so the user knows the message is sent (changes the placeholder)
+		$('#new_message').val('').attr('placeholder', 'Sent.'); // placeholder to "Sending ..." and empties #new_message
+		window.setTimeout(function() {
+		    $('#new_message').attr('placeholder', 'Message'); // placeholder after one more second to "Message"
+		}, 1000);
 
-    } // if
+    }
     
-} // send
+}
 
 function encodeHTML(text) {
 	return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');

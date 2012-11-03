@@ -1,10 +1,8 @@
-// Build 10
+// Build 12
 
 
 // required modules:
-var http = require("http"),
-    querystring = require("querystring"),
-    fs = require('fs');
+var http = require("http");
 
 
 // starts a server and listens on port 8002
@@ -13,10 +11,7 @@ http.createServer(onRequest).listen(port);
 console.log("Server started, listening on port " + port + "\n");
 
 
-// listens for the POST data
 function onRequest(req, res) {
-
-    //console.log("Received request\n");
 
     var postData='';
 
@@ -44,21 +39,21 @@ function onRequest(req, res) {
         	if (reqType == 'user' && userID && name) saveUser(userID, name);
         
         }
+
+		else {
+    
+    		removeUsers();
+    
+    		var resData = {};
+    		resData.messages = messages;
+    		resData.users = users;
+    
+    		res.writeHead(200, {'Content-Type': 'text/plain'});
+    		res.end("chat_refresh('" + JSON.stringify(resData) + "')");
+    
+    	}
         
     });
-    
-    if (postData == false) { // only if it wasn't a message/user
-    
-    	removeUsers();
-    
-    	var responseData = {};
-    	responseData.messages = messages;
-    	responseData.users = users;
-    
-    	res.writeHead(200, {'Content-Type': 'text/plain'});
-    	res.end("chat('" + JSON.stringify(responseData) + "')");
-    
-    }
 
 }
 
@@ -69,8 +64,6 @@ setDefaultMessage();
 
 function saveMessage(userID, name, message, time) {
     
-    console.log("Function saveMessage() was called");
-    
     var entry = {};
     entry.userID = userID;
     entry.name = name;
@@ -79,24 +72,8 @@ function saveMessage(userID, name, message, time) {
     
     messages[Object.keys(messages).length] = entry;
     
-}
-
-function setDefaultMessage() {
-
-	var entry = {};
-	entry.userID = 0;
-	entry.name = 'Chat';
-	entry.message = 'Type in your name and message, then hit enter to submit. URLs and mail addresses are hyperlinked.';
-	entry.time = getISODate();
-
-	messages[Object.keys(messages).length] = entry;
-
-	function getISODate() {
-    	d = new Date();
-    	function pad(n){return n < 10 ? '0' + n : n}
-    	return d.getUTCFullYear() + "-" + pad(d.getUTCMonth()+1) + "-" + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds()) + "Z";
-    }
-
+    console.log("Message saved.\n");
+    
 }
 
 
@@ -122,3 +99,21 @@ function removeUsers() {
 	
 }
 
+
+function setDefaultMessage() {
+
+	var entry = {};
+	entry.userID = 0;
+	entry.name = 'Chat';
+	entry.message = 'Type in your name and message, then hit enter to submit. URLs and mail addresses are hyperlinked.';
+	entry.time = getISODate();
+
+	messages[Object.keys(messages).length] = entry;
+
+	function getISODate() {
+    	d = new Date();
+    	function pad(n){return n < 10 ? '0' + n : n}
+    	return d.getUTCFullYear() + "-" + pad(d.getUTCMonth()+1) + "-" + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds()) + "Z";
+    }
+
+}
