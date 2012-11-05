@@ -1,6 +1,6 @@
-**Version 3.1.1**
+**Version 4.0**
 
-send.js sends the message (using jQuery Ajax) to server.js that saves it into an object, also one time every 5 seconds it send.js sends the userID and name to the server (that also saves it into an object). If a user hasn't sent his userID to the server for 10 seconds or more, the server removes him from the users object. refresh.js loads the messages and users as JSON object from the server and displays them in #messages and #users.
+The chat uses socket.io (http://socket.io) to send messages to the server which redirects them to all clients. After the client has sent away his first message he updates his status every five seconds so the server knows he's just online. Every time a user is added/removed the new data is sent to all clients.
 
 # Install
 
@@ -10,7 +10,7 @@ Because the chat uses node.js (http://nodejs.org/) to receive the messages, you 
 
 2. Download the chat and navigate to it's directory.
 
-3. Open send.js in a text editor, change 'http://luisgerhorst.de:8002/' in line 11 to your server's domain and save the file. (For example if your domain is 'http://alf.me/' you have to change it to 'http://alf.me:8002/'.)
+3. Open index.html in a text editor, change 'http://luisgerhorst.de:8020/' in line 28 to your server's domain and save the file. (For example if your domain is 'http://alf.me/' you have to change it to 'http://alf.me:8020/'.)
 
 4. Open the command line and navigate to the chat's directory, then execute server.js with node by typing "nohup node server.js &" and you're done! (If you just type "node server.js", the process stops when you close the Terminal.)
 
