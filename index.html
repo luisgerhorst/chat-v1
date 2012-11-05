@@ -22,9 +22,17 @@
   
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="moment.js"></script>
+  <script type="text/javascript" src="socket.io.js"></script>
+  
+  <script type="text/javascript">
+  	  var socket = io.connect('http://luisgerhorst.de:8020/'),
+  	      userID = Math.round(Math.random() * 9999999999);
+  </script>
+  
   <script type="text/javascript" src="send.js"></script>
-  <script type="text/javascript" src="refresh.js"></script>
+  <script type="text/javascript" src="load.js"></script>
   <script type="text/javascript" src="javascript.js"></script>
+  
 
 </head>
 <body>
