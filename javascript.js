@@ -1,7 +1,4 @@
-// Build 8
-
-/* A few more functions */
-
+// Build 9
 
 $(document).ready(function () {
 
@@ -10,8 +7,6 @@ $(document).ready(function () {
 if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
     $('*').click(function(){});
 } // if
-
-$('#new_name').val(parseGET('name')); // adds the content of the GET parameter "name" into the name field
 
 // get's the content of GET parameter
 function parseGET(name) {

@@ -5,7 +5,7 @@
 <!-- 
     
   Project: view README.MD
-  Document: Build 10
+  Document: Build 17
 	
   Chat created by Luis Gerhorst -  Website: http://luisgerhorts.de/ - Mail & Jabber: luis@luisgerhorst.de
   Fork me on GitHub http://github.com/luisgerhorst/node-chat
@@ -17,8 +17,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="content-language" content="de-de" />
   <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0;"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="animations.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="style.css" media="only screen and (min-device-width:480px)" />
+  <link rel="stylesheet" type="text/css" href="mobile.css" media="handheld, only screen and (max-device-width:480px)" />
   
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="moment.js"></script>
@@ -37,27 +41,32 @@
 </head>
 <body>
 
-
-<ul id="users"></ul>
-
+<div id="full-page">
 
 <div id="wrapper">
 
+	<div id="right-wrap">
 
-	<ol id="messages"><noscript><p>You have to enable Javascript to use this chat.</p></noscript></ol> <!-- #chat (will be filled with the content of chat.txt by refresh.js)  -->
+		<ul id="users" class="area"></ul>
+	
+	</div> <!-- #right-wrap -->
 
+	<div id="left-wrap">
+		
+		<ol id="messages" class="area"></ol>
 
-	<form class="form" id="new">
+		<form class="form area" id="new">
 
-		<div class="name hide" id="name"></div>
-		<input class="name show" id="new_name" name="name" placeholder="      Name" autocomplete="on">
+			<input class="name show" id="new_name" name="name" placeholder="Name" autocomplete="off">
 
-		<input class="message" id="new_message" name="message" placeholder="Message" onKeyPress="return sendMessage(event)" autocomplete="off" > <!-- onKeyPress="return send(event)" calls the Javascript function (checkSubmit) which send the data to the server if the pressed key is enter -->
+			<input class="message" id="new_message" name="message" placeholder="Message" onKeyPress="return sendMessage(event)" autocomplete="off" >
 
-	</form> <!-- #new -->
-
+		</form> <!-- #new -->
+		
+	</div> <!-- #left-wrap -->
 
 </div> <!-- #wrapper -->
 
+</div> <!-- #full-page -->
 
 </body>

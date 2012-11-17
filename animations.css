@@ -1,0 +1,226 @@
+/* slideOutNewName */
+
+@keyframes slideOutNewName {
+
+	0% {
+		width: 150px;
+		opacity: 1.0;
+	}
+	
+	100% {
+		width: 0;
+		opacity: 0.0;
+	}
+	
+}
+
+@-webkit-keyframes slideOutNewName {
+
+	0% {
+		width: 150px;
+		opacity: 1.0;
+	}
+	
+	100% {
+		width: 0;
+		opacity: 0.0;
+	}
+	
+}
+
+@-moz-keyframes slideOutNewName {
+
+	0% {
+		width: 150px;
+		opacity: 1.0;
+	}
+	
+	100% {
+		width: 0;
+		opacity: 0.0;
+	}
+	
+}
+
+@-o-keyframes slideOutNewName {
+
+	0% {
+		width: 150px;
+		opacity: 1.0;
+	}
+	
+	100% {
+		width: 0;
+		opacity: 0.0;
+	}
+	
+}
+
+
+/* appearMessage */
+
+@keyframes appearMessage {
+
+	0% {
+		opacity: 0.0;
+	}
+	
+	100% {
+		opacity: 1.0;
+	}
+	
+}
+
+@-webkit-keyframes appearMessage {
+
+	0% {
+		opacity: 0.0;
+	}
+	
+	100% {
+		opacity: 1.0;
+	}
+	
+}
+
+@-moz-keyframes appearMessage {
+
+	0% {
+		opacity: 0.0;
+	}
+	
+	100% {
+		opacity: 1.0;
+	}
+	
+}
+
+@-o-keyframes appearMessage {
+
+	0% {
+		opacity: 0.0;
+	}
+	
+	100% {
+		opacity: 1.0;
+	}
+	
+}
+
+
+/* appearUser */
+
+@keyframes appearUser {
+
+	0% {
+		margin: 10px 0 10px 20px;
+		opacity: 0.0;
+	}
+	
+	100% {
+		margin: 10px;
+		opacity: 1.0;
+	}
+	
+}
+
+@-webkit-keyframes appearUser {
+
+	0% {
+		margin: 10px 0 10px 20px;
+		opacity: 0.0;
+	}
+	
+	100% {
+		margin: 10px;
+		opacity: 1.0;
+	}
+	
+}
+
+@-moz-keyframes appearUser {
+
+	0% {
+		margin: 10px 0 10px 20px;
+		opacity: 0.0;
+	}
+	
+	100% {
+		margin: 10px;
+		opacity: 1.0;
+	}
+	
+}
+
+@-o-keyframes appearUser {
+
+	0% {
+		margin: 10px 0 10px 20px;
+		opacity: 0.0;
+	}
+	
+	100% {
+		margin: 10px;
+		opacity: 1.0;
+	}
+	
+}
+
+
+/* disappearUser */
+
+@keyframes disappearUser {
+
+	0% {
+		margin: 10px;
+		opacity: 1.0;
+	}
+	
+	100% {
+		margin: 10px 20px 10px 0;
+		opacity: 0.0;
+	}
+	
+}
+
+@-webkit-keyframes disappearUser {
+
+	0% {
+		margin: 10px;
+		opacity: 1.0;
+	}
+	
+	100% {
+		margin: 10px 20px 10px 0;
+		opacity: 0.0;
+	}
+	
+}
+
+@-moz-keyframes disappearUser {
+
+	0% {
+		margin: 10px;
+		opacity: 1.0;
+	}
+	
+	100% {
+		margin: 10px 20px 10px 0;
+		opacity: 0.0;
+	}
+	
+}
+
+@-o-keyframes disappearUser {
+
+	0% {
+		margin: 10px;
+		opacity: 1.0;
+	}
+	
+	100% {
+		margin: 10px 20px 10px 0;
+		opacity: 0.0;
+	}
+	
+}

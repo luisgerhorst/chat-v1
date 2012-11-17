@@ -1,30 +1,42 @@
+// Build 22
+
+var firstMessage = true;
+var name='';
 
 function sendMessage(e) { // function is called by index.html's form, every time a key is pressed
 
-	var name='', message='';
-	name = $('#new_name').val();
+	var message='';
 	message = $('#new_message').val();
+	
+	if (firstMessage) { // if it's the first message
+		console.log("first message, setting name");
+		name = encodeHTML($('#new_name').val());
+	}
 
 	if (e && e.keyCode == 13 && name && message) { // if pressed key ("e") is enter (keycode 13) and value of name & message is true
 
-		console.log("send -> if");
-
     	var data = {};
 			data.userID = userID;
-			data.name = encodeHTML(name);
+			data.name = name;
 			data.message = encodeHTML(message);
 			data.time = getISODate();
 	    
 	    socket.emit('newMessage', data);
 	    
-	    // so you can't change your name anymore:
-		$('#name').html(name + ':').removeClass('hide').addClass('show');
-		$('#new_name').removeClass('show').addClass('hide');
+		if (firstMessage) { // if it's the first message
+			firstMessage = false;
+			$('#new_name').addClass('animate');
+			setTimeout(function () {
+				$('#new_name').hide();
+				$('#new_message').addClass('full');
+			}, 200);
+			sendUser();
+		}
     
 		// so the user knows the message is sent (changes the placeholder):
 		$('#new_message').val('').attr('placeholder', 'Sent.'); // placeholder to "Sending ..." and empties #new_message
 		window.setTimeout(function() {
-		    $('#new_message').attr('placeholder', 'Message'); // placeholder after one more second to "Message"
+		    $('#new_message').attr('placeholder', name); // placeholder after one more second to the user's name
 		}, 1000);
 
     }
@@ -47,22 +59,25 @@ setInterval(function() {
 }, 5*1000);
 
 function sendUser() {
-
-    var name = '';
-    name = $('#new_name').val();
     
-    if (name && userID && $('#name').html()) { // if user has already sent a message
+    if (name && userID) { // if user has already sent a message
 	
 		var data = {};
 			data.userID = userID;
-			data.name = encodeHTML(name);
+			data.name = name;
 	    
-	    socket.emit('removeUsers');
-	    socket.emit('saveUser', data);
+	    socket.emit('updateUsers', data);
     
     }
     
-    else socket.emit('removeUsers');
+    else {
+    	
+    	var data = {};
+			data.userID = userID;
+			data.name = false;
+			
+    	socket.emit('updateUsers', data);
+    }
 	
 }
 

@@ -1,13 +1,33 @@
+// Build 34
+
+$(document).ready(function () {
+
+
+var newMessageAudioElement;
+newMessageAudioElement = new Audio("");
+document.body.appendChild(newMessageAudioElement);
+var canPlayType = newMessageAudioElement.canPlayType("audio/ogg");
+if(canPlayType.match(/maybe|probably/i)) {
+	newMessageAudioElement.src = 'new-message.ogg';
+} 
+else {
+	newMessageAudioElement.src = 'new-message.mp3';
+}
+
 
 socket.on('newMessage', function (message) {
     
-    var entry = '<li data-userID="' + message.userID + '"><span class="name">' + message.name + ':</span><div class="content"><span class="message">' + linkURLs(message.message) + ' </span><span class="time" data-time="' + message.time + '"></span></div></li>';
+    var entry = '<li data-userID="' + message.userID + '"><div class="content"><p class="message">' + linkURLs(message.message) + '</p><h4 class="name">- ' + message.name + '</h4><time data-time="' + message.time + '"></time></div></li>';
 	
 	$('#messages').append(entry);
 	
+	if (message.userID != userID) newMessageAudioElement.play();
+	
     setTime();
     
-    window.scrollTo(0,document.body.scrollHeight); // scroll to bottom
+    // for iOS, shows the time when tapping onto a message
+    if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) $('html, body').animate({scrollTop: $(document).height()}, 300);
+    else $('#messages').animate({ scrollTop: document.getElementById('messages').scrollHeight }, 300);
     
     // functions:
     
@@ -25,17 +45,23 @@ socket.on('newMessage', function (message) {
 socket.on('updatedUsers', function (users) {
     
     var html='';
+    var	watching = 0;
 	
 	for (var userID in users) {
-		html += '<li data-userID="' + userID + '">' + users[userID].name + '</li>';
+		if (users[userID].name != false) html += '<li data-userID="' + userID + '">' + users[userID].name + '</li>';
+		else watching++;
 	}
 	
-	if (html) {
-		html = '<p>Online:</p>' + html;
+	if (watching == 1) html += '<li>' + watching + ' person watching</li>';
+	if (watching >= 2) html += '<li>' + watching + ' people watching</li>';
+	
+	$('#users li').each(function(index) { // for each, do:
+    	$(this).addClass('disappear');
+    });
+	
+	setTimeout(function () {
 		$('#users').html(html);
-	}
-	
-	else $('#users').html('');
+	}, 200);
     
 });
 
@@ -44,7 +70,7 @@ setInterval(setTime, 10*1000);
 
 function setTime() { // adds relative timestamps to every entry
 
-    $('span.time').each(function(index) { // for each, do
+    $('#messages li time').each(function(index) { // for each, do
     
     	if ($(this).attr('data-time')) { // if this element has 'data-time' attribute
     
@@ -58,3 +84,6 @@ function setTime() { // adds relative timestamps to every entry
     });
     
 }
+
+
+}); // document.ready
