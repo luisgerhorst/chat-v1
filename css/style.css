@@ -1,0 +1,247 @@
+/* Build 12 */
+
+/* Allgemein */
+
+body {
+    background: rgb(245,247,251);
+    font-size: 14px;
+    line-height: 18px;
+    font-family: "Helvetica Neue", sans-serif;
+    color: rgb(63,63,63);
+    text-shadow: 0 1px 0 #fff;
+    }
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    border: none;
+    }
+    
+input {
+	-webkit-appearance: none; /* remove iOS inset shadow */
+}
+
+input:focus {
+	outline: none; /* remove Safari blue glow */
+}
+    
+#full-page { /* without this, height: 100%; in #wrapper wouldn't work */
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	bottom: 30px;
+	left: 30px;
+}
+    
+#wrapper {
+	margin: 0 auto;
+	width: 800px;
+	height: 100%;
+}
+
+#left-wrap {
+	float: left;
+	width: 600px;
+	height: 100%;
+	position: relative;
+}
+
+#right-wrap {
+	float: right;
+	width: 170px;
+	height: 100%;
+	position: relative;
+	margin: 0 0 0 30px;
+}
+
+.area {
+	background: rgb(230,233,236);
+	border: 1px solid rgb(175,176,179);
+	border-radius: 5px;
+	box-shadow: 0 0 0 1px #fff;
+	position: relative;
+}
+
+
+/* User */
+
+#users {
+	list-style: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+#users li {
+	margin: 10px;
+	padding: 6px 10px 6px 10px;
+	background: rgb(245,247,251);
+	border: 1px solid rgb(175,176,179);
+	border-radius: 5px;
+	box-shadow: inset 0 0 0 1px #fff;
+	-webkit-animation-name: appearUser;
+	-webkit-animation-duration: 0.2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+}
+
+#users li.disappear {
+	-webkit-animation-name: disappearUser;
+	-webkit-animation-duration: 0.2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+}
+
+
+/* Message */
+
+#messages {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 80px;
+	left: 0;
+	padding: 10px 10px 0 10px;
+	list-style: none;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+#messages li {
+	width: 100%;
+	padding: 0 0 10px 0;
+	-webkit-animation-name: appearMessage;
+	-webkit-animation-duration: 0.1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+}
+
+#messages li .content {
+	display: inline-block;
+	max-width: 580px;
+	height: auto;
+}
+
+#messages li p {
+	padding: 6px 10px 6px 10px;
+	background: rgb(245,247,251);
+	border: 1px solid rgb(175,176,179);
+	border-radius: 5px;
+	box-shadow: inset 0 0 0 1px #fff;
+}
+
+#messages li h4, #messages li time {
+	font-family: Georgia, serif;
+	font-size: 12px;
+	line-height: 20px;
+	font-weight: normal;
+	font-style: italic;
+	color: rgb(140,142,145);
+}
+
+#messages li h4 {
+	float: left;
+	margin: 0 10px 0 10px;
+}
+
+#messages li time {
+	display: none;
+	float: right;
+	margin: 0 10px 0 0;
+}
+
+#messages li:hover time {
+	display: inline;
+}
+
+
+/* New */
+
+#new {
+	height: 30px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 10px;
+}
+
+#new input {
+	background: rgb(245,247,251);
+	border: 1px solid rgb(175,176,179);
+	border-radius: 5px;
+	box-shadow: inset 0 0 0 1px #fff;
+	padding: 6px 10px 6px 10px;
+	line-height: 16px;
+	font-size: 14px;
+	transition-property: box-shadow, border, background;
+    transition-duration: 0.1s;
+    transition-timing-function: linear;
+    -webkit-transition-property: box-shadow, border, background;
+    -webkit-transition-duration: 0.1s;
+    -webkit-transition-timing-function: linear;
+    -moz-transition-property: box-shadow, border, background;
+    -moz-transition-duration: 0.1s;
+    -moz-transition-timing-function: linear;
+    -o-transition-property: box-shadow, border, background;
+    -o-transition-duration: 0.1s;
+    -o-transition-timing-function: linear;
+}
+
+#new input:focus {
+	background: none;
+	border: 1px solid transparent;
+	box-shadow: none;
+}
+
+#new input::input-placeholder, #new input::-webkit-input-placeholder, #new input::-moz-input-placeholder, #new input::-o-input-placeholder {
+    color: rgb(140,142,145);
+    font-size: 12px;
+    line-height: 16px;
+    font-family: Georgia, serif;
+    font-style: italic;
+    text-shadow: 0 1px #fff;
+    transition-property: color, text-shadow;
+    transition-duration: 0.1s;
+    transition-timing-function: linear;
+    -webkit-transition-property: color, text-shadow;
+    -webkit-transition-duration: 0.1s;
+    -webkit-transition-timing-function: linear;
+    -moz-transition-property: color, text-shadow;
+    -moz-transition-duration: 0.1s;
+    -moz-transition-timing-function: linear;
+    -o-transition-property: color, text-shadow;
+    -o-transition-duration: 0.1s;
+    -o-transition-timing-function: linear;
+}
+
+#new input:focus::input-placeholder, #new input:focus::-webkit-input-placeholder, #new input:focus::-moz-input-placeholder, #new input:focus::-o-input-placeholder {
+	color: transparent;
+    text-shadow: none;
+}
+
+#new_name {
+	width: 150px;
+}
+
+#new_name.animate {
+	-webkit-animation-name: slideOutNewName;
+	-webkit-animation-duration: 0.2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+}
+
+#new_message {
+	width: 368px;
+	margin: 0 0 0 10px;
+}
+
+#new_message.full {
+	width: 556px;
+	margin: 0;
+}

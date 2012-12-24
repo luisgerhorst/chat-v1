@@ -1,4 +1,4 @@
-**Version 4.0**
+**Version 4.2.1**
 
 The chat uses socket.io (http://socket.io) to send messages to the server which redirects them to all clients. After the client has sent away his first message he updates his status every five seconds so the server knows he's just online. Every time a user is added/removed the new data is sent to all clients.
 
@@ -10,9 +10,9 @@ Because the chat uses node.js (http://nodejs.org/) to receive the messages, you 
 
 2. Download the chat and navigate to it's directory.
 
-3. Open index.html in a text editor, change 'http://luisgerhorst.de:8020/' in line 28 to your server's domain and save the file. (For example if your domain is 'http://alf.me/' you have to change it to 'http://alf.me:8020/'.)
-
 4. Open the command line and navigate to the chat's directory, then execute server.js with node by typing "nohup node server.js &" and you're done! (If you just type "node server.js", the process stops when you close the Terminal.)
+
+5. Optional: Delete the content of messages.json with a text editor.
 
 # More
 

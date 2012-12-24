@@ -20,22 +20,22 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="stylesheet" type="text/css" href="animations.css" media="all" />
-  <link rel="stylesheet" type="text/css" href="style.css" media="only screen and (min-device-width:480px)" />
-  <link rel="stylesheet" type="text/css" href="mobile.css" media="handheld, only screen and (max-device-width:480px)" />
+  <link rel="stylesheet" type="text/css" href="css/animations.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" media="only screen and (min-device-width:480px)" />
+  <link rel="stylesheet" type="text/css" href="css/mobile.css" media="handheld, only screen and (max-device-width:480px)" />
   
-  <script type="text/javascript" src="jquery.js"></script>
-  <script type="text/javascript" src="moment.js"></script>
-  <script type="text/javascript" src="socket.io.js"></script>
+  <script type="text/javascript" src="javascript/libraries/jquery.js"></script>
+  <script type="text/javascript" src="javascript/libraries/moment.js"></script>
+  <script type="text/javascript" src="javascript/libraries/socket.io.js"></script>
   
   <script type="text/javascript">
-  	  var socket = io.connect('http://luisgerhorst.de:8020/'),
+  	  var socket = io.connect('http://' + document.domain +':9002/'),
   	      userID = Math.round(Math.random() * 9999999999);
   </script>
   
-  <script type="text/javascript" src="send.js"></script>
-  <script type="text/javascript" src="load.js"></script>
-  <script type="text/javascript" src="javascript.js"></script>
+  <script type="text/javascript" src="javascript/load.js"></script>
+  <script type="text/javascript" src="javascript/send.js"></script>
+  <script type="text/javascript" src="javascript/javascript.js"></script>
   
 
 </head>
