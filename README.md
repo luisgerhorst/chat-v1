@@ -1,5 +1,3 @@
-**Version 4.2.1**
-
 The chat uses socket.io (http://socket.io) to send messages to the server which redirects them to all clients. After the client has sent away his first message he updates his status every five seconds so the server knows he's just online. Every time a user is added/removed the new data is sent to all clients.
 
 # Install
@@ -8,11 +6,13 @@ Because the chat uses node.js (http://nodejs.org/) to receive the messages, you 
 
 1. Install node.js, you find a guidance for Mac, Windows, Ubuntu and a few more systems on http://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 
-2. Download the chat and navigate to it's directory.
+2. Install npm with the command "curl http://npmjs.org/install.sh | sh".
 
-4. Open the command line and navigate to the chat's directory, then execute server.js with node by typing "nohup node server.js &" and you're done! (If you just type "node server.js", the process stops when you close the Terminal.)
+4. Download the chat and navigate to it's directory.
 
-5. Optional: Delete the content of messages.json with a text editor.
+5. Install all required node modules defined in package.json with "npm install".
+
+6. Execute server.js with node by typing "nohup node server.js &", you're done! (If you just type "node server.js", the process stops when you close the Terminal.)
 
 # More
 
