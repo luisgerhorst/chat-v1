@@ -1,3 +1,8 @@
+# Features
+
+- messages are forwarded to clients (not stored on the server)
+- HTTP server not included
+
 The chat uses socket.io (http://socket.io) to send messages to the server which redirects them to all clients. After the client has sent away his first message he updates his status every five seconds so the server knows he's just online. Every time a user is added/removed the new data is sent to all clients.
 
 # Install
